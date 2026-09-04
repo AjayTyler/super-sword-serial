@@ -1,0 +1,70 @@
+{{!--
+  An Item-backed trait: a Distinction or a Signature Asset.
+
+  Expects: item, dieRatings, editable
+  Optional: showD4Trade (Distinctions only)
+
+  Talents use this too, via hasDie=false -- they carry SFX rather than a die, so there is
+  nothing to add to a pool.
+--}}
+<li class="sss-trait-row sss-item-row draggable" data-item-id="{{item.id}}">
+    {{#if hasDie}}
+    <button type="button" class="sss-trait-add"
+            data-action="addTraitDie"
+            data-faces="{{item.system.die}}"
+            data-trait-name="{{item.name}}"
+            data-trait-id="{{item.id}}"
+            data-trait-type="{{item.type}}"
+            data-tooltip="{{localize 'SSS.Pool.AddTooltip'}}">
+        {{item.name}}
+    </button>
+    {{else}}
+    <span class="sss-trait-label">{{item.name}}</span>
+    {{/if}}
+
+    {{#if hasDie}}
+    <select name="items.{{item.id}}.system.die" data-dtype="Number" class="sss-die-select"
+            aria-label="{{item.name}} {{localize 'SSS.Die.Label'}}"
+            {{#unless editable}}disabled{{/unless}}>
+        {{#each dieRatings as |faces|}}
+        <option value="{{faces}}" {{#if (eq faces ../item.system.die)}}selected{{/if}}>d{{faces}}</option>
+        {{/each}}
+    </select>
+    {{/if}}
+
+    <div class="sss-row-controls">
+        {{#if showD4Trade}}
+        <button type="button" class="sss-row-control icon"
+                data-action="addDistinctionAsD4"
+                data-item-id="{{item.id}}"
+                data-tooltip="{{localize 'SSS.Pool.TakeD4Tooltip'}}"
+                aria-label="{{localize 'SSS.Pool.TakeD4Tooltip'}}">
+            <i class="fa-solid fa-circle-4" inert></i>
+        </button>
+        {{/if}}
+        <button type="button" class="sss-row-control icon" data-action="editItem"
+                data-tooltip="{{localize 'SSS.Item.Edit'}}"
+                aria-label="{{localize 'SSS.Item.Edit'}}">
+            <i class="fa-solid fa-pen-to-square" inert></i>
+        </button>
+        {{#if editable}}
+        <button type="button" class="sss-row-control icon" data-action="deleteItem"
+                data-tooltip="{{localize 'SSS.Item.Delete'}}"
+                aria-label="{{localize 'SSS.Item.Delete'}}">
+            <i class="fa-solid fa-trash" inert></i>
+        </button>
+        {{/if}}
+    </div>
+
+    {{#if item.system.sfx.length}}
+    <ul class="sss-row-sfx">
+        {{#each item.system.sfx as |sfx|}}
+        <li>
+            <span class="sss-sfx-name">{{sfx.name}}</span>
+            {{#if sfx.cost}}<span class="sss-sfx-cost">{{sfx.cost}} PP</span>{{/if}}
+            {{#if sfx.effect}}<span class="sss-sfx-effect">{{sfx.effect}}</span>{{/if}}
+        </li>
+        {{/each}}
+    </ul>
+    {{/if}}
+</li>

@@ -1,0 +1,144 @@
+{{!--
+  All traits, in one scrolling column.
+
+  Signature Assets and Talents live here rather than behind their own tab because they see
+  frequent play -- a Signature is often added to a pool, and Talent SFX need to be readable
+  while deciding a roll. One long scroll beats a click.
+
+  MODDERS: to add a category, add its keys to module/config.mjs, shape it in the sheet's
+  _prepareContext, and copy one of these fieldsets.
+--}}
+<section class="tab sss-traits scrollable {{tab.cssClass}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
+
+    <fieldset>
+        <legend class="control">
+            {{localize "SSS.Actor.PC.Distinctions"}}
+            {{#if editable}}
+            <button type="button" class="sss-add-item icon" data-action="createItem"
+                    data-item-type="distinction"
+                    data-tooltip="{{localize 'SSS.Item.Distinction.Add'}}"
+                    aria-label="{{localize 'SSS.Item.Distinction.Add'}}">
+                <i class="fa-solid fa-plus" inert></i>
+            </button>
+            {{/if}}
+        </legend>
+        <ul class="sss-trait-list" data-items>
+            {{#each distinctions as |item|}}
+            {{> "systems/super-sword-serial/templates/parts/item-trait-row.hbs"
+                item=item dieRatings=../dieRatings editable=../editable
+                hasDie=true showD4Trade=true}}
+            {{else}}
+            <li class="sss-empty">{{localize "SSS.Item.Distinction.Empty"}}</li>
+            {{/each}}
+        </ul>
+    </fieldset>
+
+    <fieldset>
+        <legend>{{localize "SSS.Actor.PC.Roles"}}</legend>
+        <ul class="sss-trait-list sss-trait-grid">
+            {{#each roles as |trait|}}
+            {{> "systems/super-sword-serial/templates/parts/trait-row.hbs"
+                trait=trait traitType="role" dieRatings=../dieRatings editable=../editable}}
+            {{/each}}
+        </ul>
+    </fieldset>
+
+    <fieldset>
+        <legend>{{localize "SSS.Actor.PC.Attributes"}}</legend>
+        <ul class="sss-trait-list sss-trait-grid">
+            {{#each attributes as |trait|}}
+            {{> "systems/super-sword-serial/templates/parts/trait-row.hbs"
+                trait=trait traitType="attribute" dieRatings=../dieRatings editable=../editable}}
+            {{/each}}
+        </ul>
+    </fieldset>
+
+    <fieldset>
+        <legend class="control">
+            {{localize "SSS.Actor.PC.Signatures"}}
+            {{#if editable}}
+            <button type="button" class="sss-add-item icon" data-action="createItem"
+                    data-item-type="signature"
+                    data-tooltip="{{localize 'SSS.Item.Signature.Add'}}"
+                    aria-label="{{localize 'SSS.Item.Signature.Add'}}">
+                <i class="fa-solid fa-plus" inert></i>
+            </button>
+            {{/if}}
+        </legend>
+        <ul class="sss-trait-list" data-items>
+            {{#each signatures as |item|}}
+            {{> "systems/super-sword-serial/templates/parts/item-trait-row.hbs"
+                item=item dieRatings=../dieRatings editable=../editable hasDie=true}}
+            {{else}}
+            <li class="sss-empty">{{localize "SSS.Item.Signature.Empty"}}</li>
+            {{/each}}
+        </ul>
+    </fieldset>
+
+    <fieldset class="sss-consequences">
+        <legend class="control">
+            {{localize "SSS.Actor.PC.Complications"}}
+            {{#if editable}}
+            <button type="button" class="sss-add-item icon" data-action="createItem"
+                    data-item-type="complication"
+                    data-tooltip="{{localize 'SSS.Item.Complication.Add'}}"
+                    aria-label="{{localize 'SSS.Item.Complication.Add'}}">
+                <i class="fa-solid fa-plus" inert></i>
+            </button>
+            {{/if}}
+        </legend>
+        <ul class="sss-trait-list" data-items>
+            {{#each complications as |item|}}
+            {{> "systems/super-sword-serial/templates/parts/item-trait-row.hbs"
+                item=item dieRatings=../dieRatings editable=../editable hasDie=true}}
+            {{else}}
+            <li class="sss-empty">{{localize "SSS.Item.Complication.Empty"}}</li>
+            {{/each}}
+        </ul>
+    </fieldset>
+
+    <fieldset class="sss-consequences sss-trauma">
+        <legend class="control">
+            {{localize "SSS.Actor.PC.Traumas"}}
+            {{#if editable}}
+            <button type="button" class="sss-add-item icon" data-action="createItem"
+                    data-item-type="trauma"
+                    data-tooltip="{{localize 'SSS.Item.Trauma.Add'}}"
+                    aria-label="{{localize 'SSS.Item.Trauma.Add'}}">
+                <i class="fa-solid fa-plus" inert></i>
+            </button>
+            {{/if}}
+        </legend>
+        <ul class="sss-trait-list" data-items>
+            {{#each traumas as |item|}}
+            {{> "systems/super-sword-serial/templates/parts/item-trait-row.hbs"
+                item=item dieRatings=../dieRatings editable=../editable hasDie=true}}
+            {{else}}
+            <li class="sss-empty">{{localize "SSS.Item.Trauma.Empty"}}</li>
+            {{/each}}
+        </ul>
+    </fieldset>
+
+    <fieldset>
+        <legend class="control">
+            {{localize "SSS.Actor.PC.Talents"}}
+            {{#if editable}}
+            <button type="button" class="sss-add-item icon" data-action="createItem"
+                    data-item-type="talent"
+                    data-tooltip="{{localize 'SSS.Item.Talent.Add'}}"
+                    aria-label="{{localize 'SSS.Item.Talent.Add'}}">
+                <i class="fa-solid fa-plus" inert></i>
+            </button>
+            {{/if}}
+        </legend>
+        <ul class="sss-trait-list" data-items>
+            {{#each talents as |item|}}
+            {{> "systems/super-sword-serial/templates/parts/item-trait-row.hbs"
+                item=item editable=../editable hasDie=false}}
+            {{else}}
+            <li class="sss-empty">{{localize "SSS.Item.Talent.Empty"}}</li>
+            {{/each}}
+        </ul>
+    </fieldset>
+
+</section>

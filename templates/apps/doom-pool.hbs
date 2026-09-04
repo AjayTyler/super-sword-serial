@@ -1,0 +1,67 @@
+{{!--
+  The GM's Doom Pool.
+
+  Dice are individually steppable because a pool of [d8, d6, d6] plays differently from a
+  single d12 -- the shape matters, not just the size.
+--}}
+<div class="sss-doom-body standard-form">
+
+    <ol class="sss-doom-dice">
+        {{#each dice as |die|}}
+        <li class="sss-doom-entry">
+            <button type="button" class="sss-doom-die"
+                    data-action="stepDoomDie"
+                    data-die-id="{{die.id}}"
+                    {{#unless ../isGM}}disabled{{/unless}}
+                    data-tooltip="{{localize 'SSS.Doom.StepTooltip'}}"
+                    aria-label="d{{die.faces}}, {{localize 'SSS.Doom.StepTooltip'}}">
+                {{> "systems/super-sword-serial/templates/parts/die-shape.hbs" faces=die.faces}}
+            </button>
+            {{#if ../isGM}}
+            <button type="button" class="sss-doom-remove icon"
+                    data-action="removeDoomDie"
+                    data-die-id="{{die.id}}"
+                    data-tooltip="{{localize 'SSS.Doom.Spend'}}"
+                    aria-label="{{localize 'SSS.Doom.Spend'}}">
+                <i class="fa-solid fa-xmark" inert></i>
+            </button>
+            {{/if}}
+        </li>
+        {{else}}
+        <li class="sss-empty">{{localize "SSS.Doom.EmptyHint"}}</li>
+        {{/each}}
+    </ol>
+
+    {{#if isGM}}
+    <div class="sss-doom-controls">
+        <label class="sss-doom-add">
+            <select name="doomDieSize" aria-label="{{localize 'SSS.Doom.AddSize'}}">
+                {{#each dieRatings as |faces|}}
+                <option value="{{faces}}" {{#if (eq faces 6)}}selected{{/if}}>d{{faces}}</option>
+                {{/each}}
+            </select>
+            <button type="button" data-action="addDoomDie"
+                    data-tooltip="{{localize 'SSS.Doom.AddTooltip'}}">
+                <i class="fa-solid fa-plus" inert></i>
+                <span>{{localize "SSS.Doom.Add"}}</span>
+            </button>
+        </label>
+
+        <div class="sss-doom-buttons">
+            <button type="button" data-action="rollDoomPool" {{#unless count}}disabled{{/unless}}>
+                <i class="fa-solid fa-dice-d20" inert></i>
+                <span>{{localize "SSS.Doom.Roll"}}</span>
+            </button>
+            <button type="button" data-action="resetDoomPool">
+                <i class="fa-solid fa-rotate-left" inert></i>
+                <span>{{localize "SSS.Doom.Reset"}}</span>
+            </button>
+        </div>
+
+        <p class="hint">{{localize "SSS.Doom.Hint"}}</p>
+    </div>
+    {{else}}
+    <p class="hint">{{localize "SSS.Doom.PlayerHint"}}</p>
+    {{/if}}
+
+</div>

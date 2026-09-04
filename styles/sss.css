@@ -1,0 +1,748 @@
+/**
+ * Super Sword Serial styles.
+ *
+ * No @layer wrapper needed: system styles declared in system.json without an explicit
+ * "layer" key land in layer(system) automatically, which sorts after all core layers
+ * except modules and exceptions. Plain rules here already beat core sheet styles.
+ *
+ * Everything consumes Foundry's custom properties rather than hardcoding colours or
+ * sizes, so the card follows the user's theme and font scale.
+ */
+
+/* -------------------------------------------- */
+/*  Cortex roll card                            */
+/* -------------------------------------------- */
+
+.sss-roll {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacer-8);
+}
+
+.sss-roll-flavor {
+    font-weight: bold;
+    text-align: center;
+}
+
+.sss-roll-formula {
+    font-family: var(--font-monospace);
+    font-size: var(--font-size-11);
+    color: var(--color-text-subtle);
+    text-align: center;
+}
+
+/* -------------------------------------------- */
+/*  The pool                                    */
+/* -------------------------------------------- */
+
+.sss-roll .sss-pool {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: var(--spacer-8);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sss-die-slot {
+    display: grid;
+    grid-template-areas:
+        "die pick"
+        "trait trait";
+    grid-template-columns: auto auto;
+    align-items: center;
+    justify-items: center;
+    gap: var(--spacer-2);
+}
+
+.sss-roll .sss-die {
+    grid-area: die;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    padding: 0;
+    border: 2px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-data-background, rgb(0 0 0 / 20%));
+    line-height: 1;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.sss-die-value {
+    font-size: var(--font-size-20);
+    font-weight: bold;
+}
+
+/* -------------------------------------------- */
+/*  Die shapes                                  */
+/* -------------------------------------------- */
+
+/* The polyhedron carries the die size. A small numeral rides with it because the d8,
+   d10, and d12 outlines are genuinely hard to tell apart at this scale. */
+.sss-shape {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15em;
+    color: var(--color-text-subtle);
+    font-size: var(--font-size-11);
+    line-height: 1;
+}
+
+.sss-shape > i {
+    font-size: 1.15em;
+}
+
+.sss-shape-size {
+    font-weight: bold;
+}
+
+.sss-die-trait {
+    grid-area: trait;
+    max-width: 5rem;
+    overflow: hidden;
+    font-size: var(--font-size-10);
+    color: var(--color-text-secondary);
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Assignment states. Colour is doubled up with a border weight and an outline so the
+   state is not conveyed by hue alone. */
+
+.sss-roll .sss-die.is-total {
+    border-color: var(--color-text-accent, #ee9b3a);
+    box-shadow: 0 0 6px var(--color-shadow-highlight, #ee9b3a);
+}
+
+.sss-roll .sss-die.is-effect {
+    border-style: double;
+    border-width: 4px;
+    border-color: var(--color-level-info, #59a1f6);
+}
+
+/* Hitch.
+   NOT line-through: a struck-through "1" in Signika reads convincingly as a "4", which
+   made hitched dice look like they had rolled the wrong number. Colour and a dashed
+   border carry the state instead, and the numeral stays plainly legible. */
+.sss-roll .sss-die.is-hitch {
+    border-style: dashed;
+    border-color: var(--color-level-error, #ce0707);
+    opacity: 0.85;
+}
+
+.sss-roll .sss-die.is-hitch .sss-die-value,
+.sss-roll .sss-die.is-hitch .sss-shape {
+    color: var(--color-level-error, #ce0707);
+}
+
+.sss-roll .sss-effect-pick {
+    grid-area: pick;
+    width: 1.5rem;
+    height: 1.5rem;
+    min-height: 0;
+    padding: 0;
+    border: none;
+    background: none;
+    font-size: var(--font-size-11);
+    color: var(--color-text-subtle);
+}
+
+.sss-roll .sss-effect-pick.is-effect {
+    color: var(--color-level-info, #59a1f6);
+}
+
+/* -------------------------------------------- */
+/*  Summary                                     */
+/* -------------------------------------------- */
+
+.sss-roll-summary {
+    display: flex;
+    justify-content: space-evenly;
+    gap: var(--spacer-8);
+    padding: var(--spacer-8) 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.sss-summary-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sss-summary-label {
+    font-size: var(--font-size-10);
+    color: var(--color-text-subtle);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.sss-summary-value {
+    font-size: var(--font-size-28);
+    font-weight: bold;
+    line-height: 1.1;
+}
+
+.sss-summary-note {
+    font-size: var(--font-size-10);
+    color: var(--color-text-subtle);
+}
+
+/* -------------------------------------------- */
+/*  Hitches and controls                        */
+/* -------------------------------------------- */
+
+.sss-hitches {
+    display: flex;
+    align-items: center;
+    gap: var(--spacer-4);
+    font-size: var(--font-size-11);
+    color: var(--color-level-warning, #ee9b3a);
+}
+
+.sss-roll-hint {
+    margin: 0;
+    font-size: var(--font-size-10);
+    color: var(--color-text-subtle);
+    text-align: center;
+}
+
+.sss-roll .sss-roll-buttons {
+    display: flex;
+    gap: var(--spacer-4);
+    margin-top: var(--spacer-4);
+}
+
+.sss-roll .sss-roll-buttons button {
+    flex: 1;
+    font-size: var(--font-size-11);
+}
+
+.sss-roll-locked {
+    margin: 0;
+    font-size: var(--font-size-10);
+    color: var(--color-text-subtle);
+    font-style: italic;
+    text-align: center;
+}
+
+/* -------------------------------------------- */
+/*  Sheet: header                               */
+/* -------------------------------------------- */
+
+.sss .sss-header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacer-12);
+}
+
+.sss .sss-portrait {
+    flex: 0 0 72px;
+    height: 72px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    object-fit: cover;
+    cursor: var(--cursor-pointer);
+}
+
+.sss-header-fields {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: var(--spacer-8);
+}
+
+.sss .sss-name {
+    flex: 1;
+    height: auto;
+    font-size: var(--font-size-24);
+}
+
+.sss-plot-points {
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sss-pp-label {
+    font-size: var(--font-size-10);
+    color: var(--color-text-subtle);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.sss .sss-pp-value {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    border-radius: 50%;
+    font-size: var(--font-size-20);
+    font-weight: bold;
+}
+
+/* -------------------------------------------- */
+/*  Sheet: trait lists                          */
+/* -------------------------------------------- */
+
+.sss .sss-trait-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacer-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Roles and Attributes are short and uniform, so they read better in columns. */
+.sss .sss-trait-list.sss-trait-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: var(--spacer-4) var(--spacer-8);
+}
+
+.sss-trait-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacer-4);
+}
+
+.sss .sss-trait-add {
+    flex: 1;
+    justify-content: flex-start;
+    min-width: 6rem;
+    font-weight: bold;
+    text-align: left;
+}
+
+.sss-trait-label {
+    flex: 1;
+    min-width: 6rem;
+    font-weight: bold;
+}
+
+.sss .sss-die-select {
+    flex: 0 0 4.5rem;
+    text-align: center;
+}
+
+.sss-row-controls {
+    display: flex;
+    flex: 0 0 auto;
+    gap: var(--spacer-2);
+}
+
+.sss .sss-row-control {
+    --button-size: 1.6rem;
+    --button-background-color: transparent;
+    --button-border-color: transparent;
+    flex: 0 0 1.6rem;
+    font-size: var(--font-size-11);
+}
+
+.sss .sss-add-item {
+    --button-size: 1.4rem;
+    --button-background-color: transparent;
+    --button-border-color: transparent;
+    flex: 0 0 1.4rem;
+    margin-left: var(--spacer-4);
+    font-size: var(--font-size-11);
+}
+
+.sss-empty {
+    font-size: var(--font-size-11);
+    color: var(--color-text-subtle);
+    font-style: italic;
+}
+
+/* SFX shown inline beneath a trait, so they can be read without opening the sheet. */
+.sss .sss-row-sfx {
+    flex: 0 0 100%;
+    margin: 0 0 var(--spacer-4) 1rem;
+    padding: 0;
+    list-style: none;
+    font-size: var(--font-size-11);
+}
+
+.sss .sss-row-sfx li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacer-4);
+    color: var(--color-text-secondary);
+}
+
+.sss-sfx-name {
+    font-weight: bold;
+}
+
+.sss-sfx-cost {
+    padding: 0 var(--spacer-4);
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    font-size: var(--font-size-10);
+}
+
+/* -------------------------------------------- */
+/*  Sheet: pool tray                            */
+/* -------------------------------------------- */
+
+.sss .sss-pool-tray {
+    flex: 0 0 auto;
+    margin: var(--spacer-8) calc(var(--spacer-16) * -1) calc(var(--spacer-16) * -1);
+    padding: var(--spacer-8) var(--spacer-16);
+    border-top: 2px solid var(--color-border);
+    background: var(--color-header-background);
+}
+
+.sss-pool-summary {
+    display: flex;
+    align-items: center;
+    gap: var(--spacer-8);
+    cursor: var(--cursor-pointer);
+    font-weight: bold;
+}
+
+.sss-pool-count {
+    min-width: 1.5rem;
+    padding: 0 var(--spacer-4);
+    border-radius: 10px;
+    background: var(--color-data-background, rgb(0 0 0 / 30%));
+    font-size: var(--font-size-11);
+    text-align: center;
+}
+
+.sss-pool-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacer-8);
+    padding-top: var(--spacer-8);
+}
+
+.sss .sss-pool-dice {
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--spacer-8);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sss-pool-entry {
+    display: grid;
+    grid-template-areas:
+        "die remove"
+        "trait trait";
+    align-items: center;
+    justify-items: center;
+    gap: var(--spacer-2);
+}
+
+.sss .sss-pool-die {
+    grid-area: die;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 2px solid var(--color-border);
+    border-radius: 6px;
+    font-size: var(--font-size-14);
+    font-weight: bold;
+}
+
+/* A stepped die is called out, since it differs from the trait's printed rating. */
+.sss .sss-pool-die.is-stepped {
+    border-style: dashed;
+    border-color: var(--color-text-accent, #ee9b3a);
+    color: var(--color-text-accent, #ee9b3a);
+}
+
+.sss .sss-pool-remove {
+    --button-size: 1.25rem;
+    --button-background-color: transparent;
+    --button-border-color: transparent;
+    grid-area: remove;
+    flex: 0 0 1.25rem;
+    font-size: var(--font-size-10);
+}
+
+.sss-pool-trait {
+    grid-area: trait;
+    max-width: 4.5rem;
+    overflow: hidden;
+    font-size: var(--font-size-10);
+    color: var(--color-text-secondary);
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sss-pool-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--spacer-8);
+}
+
+.sss-pool-keep {
+    display: flex;
+    align-items: center;
+    gap: var(--spacer-4);
+    font-size: var(--font-size-11);
+}
+
+.sss .sss-pool-keep input {
+    width: 3.5rem;
+    text-align: center;
+}
+
+.sss .sss-pool-roll {
+    flex: 1;
+    min-width: 6rem;
+    font-weight: bold;
+}
+
+/* -------------------------------------------- */
+/*  Item sheet: SFX editor                      */
+/* -------------------------------------------- */
+
+.sss .sss-sfx-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacer-8);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sss-sfx-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacer-4);
+    padding: var(--spacer-8);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+}
+
+.sss-sfx-head {
+    display: flex;
+    align-items: center;
+    gap: var(--spacer-4);
+}
+
+.sss-sfx-head > input[type="text"] {
+    flex: 1;
+    font-weight: bold;
+}
+
+.sss-sfx-cost-field {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: var(--spacer-4);
+    font-size: var(--font-size-11);
+}
+
+.sss .sss-sfx-cost-field input {
+    width: 3.5rem;
+    text-align: center;
+}
+
+/* Single scroll container for the whole item body -- see templates/item/body.hbs. */
+.sss .sss-item-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--spacer-16);
+}
+
+/* -------------------------------------------- */
+/*  Consequences: Complications and Trauma      */
+/* -------------------------------------------- */
+
+/* Marked apart from the traits above them: these are things done TO the character. */
+.sss .sss-consequences {
+    border-color: var(--color-level-warning, #ee9b3a);
+}
+
+.sss .sss-consequences.sss-trauma {
+    border-color: var(--color-level-error, #ce0707);
+}
+
+/* -------------------------------------------- */
+/*  Doom Pool                                   */
+/* -------------------------------------------- */
+
+.sss-doom-body {
+    padding: var(--spacer-12);
+}
+
+.sss .sss-doom-dice {
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--spacer-8);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sss-doom-entry {
+    display: flex;
+    align-items: center;
+    gap: var(--spacer-2);
+}
+
+.sss .sss-doom-die {
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 2px solid var(--color-level-error, #ce0707);
+    border-radius: 6px;
+    font-size: var(--font-size-14);
+    font-weight: bold;
+}
+
+.sss .sss-doom-remove {
+    --button-size: 1.25rem;
+    --button-background-color: transparent;
+    --button-border-color: transparent;
+    flex: 0 0 1.25rem;
+    font-size: var(--font-size-10);
+}
+
+.sss-doom-controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacer-8);
+}
+
+.sss .sss-doom-add {
+    display: flex;
+    align-items: center;
+    gap: var(--spacer-4);
+}
+
+.sss .sss-doom-add select {
+    flex: 0 0 5rem;
+    text-align: center;
+}
+
+.sss .sss-doom-buttons {
+    display: flex;
+    gap: var(--spacer-4);
+}
+
+.sss .sss-doom-buttons button {
+    flex: 1;
+}
+
+/* -------------------------------------------- */
+/*  Challenge sheet                             */
+/* -------------------------------------------- */
+
+.sss-challenge-stats {
+    display: flex;
+    flex: 0 0 auto;
+    gap: var(--spacer-12);
+}
+
+.sss-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sss-stat-label {
+    font-size: var(--font-size-10);
+    color: var(--color-text-subtle);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.sss-stat-value {
+    font-size: var(--font-size-20);
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.sss .sss-round {
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border-radius: 50%;
+    font-size: var(--font-size-18);
+    font-weight: bold;
+}
+
+.sss .sss-challenge-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--spacer-16);
+}
+
+.sss .sss-core-dice {
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--spacer-8);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sss-core-entry {
+    display: flex;
+    align-items: center;
+    gap: var(--spacer-2);
+}
+
+.sss .sss-core-die {
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 2px solid var(--color-text-accent, #ee9b3a);
+    border-radius: 6px;
+    font-size: var(--font-size-14);
+    font-weight: bold;
+}
+
+.sss .sss-core-remove {
+    --button-size: 1.25rem;
+    --button-background-color: transparent;
+    --button-border-color: transparent;
+    flex: 0 0 1.25rem;
+    font-size: var(--font-size-10);
+}
+
+.sss .sss-core-controls {
+    display: flex;
+    gap: var(--spacer-4);
+}
+
+.sss .sss-core-controls button {
+    flex: 1;
+}
+
+.sss .sss-notation input {
+    font-family: var(--font-monospace);
+}
+
+/* Die shapes stand in for the old "d6" text on every pooled die. */
+.sss .sss-pool-die .sss-shape,
+.sss .sss-doom-die .sss-shape,
+.sss .sss-core-die .sss-shape {
+    flex-direction: column;
+    gap: 0;
+    color: inherit;
+    font-size: var(--font-size-10);
+}
+
+.sss .sss-pool-die .sss-shape > i,
+.sss .sss-doom-die .sss-shape > i,
+.sss .sss-core-die .sss-shape > i {
+    font-size: 1.6em;
+}

@@ -1,0 +1,95 @@
+{{!--
+  Core dice, Signature Assets, and description, in one scroll container.
+
+  Core dice count is duration and size is difficulty, so both the number of dice and their
+  sizes move during play as players wear the challenge down.
+--}}
+<section class="sss-challenge-body scrollable">
+
+    <fieldset>
+        <legend>{{localize "SSS.Challenge.CoreDice"}}</legend>
+
+        {{#if editable}}
+        <div class="form-group sss-notation">
+            <label for="{{rootId}}-notation">{{localize "SSS.Challenge.Notation"}}</label>
+            <div class="form-fields">
+                <input id="{{rootId}}-notation" type="text" name="diceNotation" value="{{notation}}"
+                       placeholder="3d6"
+                       aria-label="{{localize 'SSS.Challenge.Notation'}}">
+                <button type="button" data-action="applyNotation"
+                        data-tooltip="{{localize 'SSS.Challenge.ApplyTooltip'}}">
+                    <i class="fa-solid fa-check" inert></i>
+                    <span>{{localize "SSS.Challenge.Apply"}}</span>
+                </button>
+            </div>
+            <p class="hint">{{localize "SSS.Challenge.NotationHint" typical=typicalSize}}</p>
+        </div>
+        {{/if}}
+
+        <ol class="sss-core-dice">
+            {{#each coreDice as |die|}}
+            <li class="sss-core-entry">
+                <button type="button" class="sss-core-die"
+                        data-action="stepCoreDie"
+                        data-die-id="{{die.id}}"
+                        {{#unless ../editable}}disabled{{/unless}}
+                        data-tooltip="{{localize 'SSS.Challenge.StepTooltip'}}"
+                        aria-label="d{{die.faces}}, {{localize 'SSS.Challenge.StepTooltip'}}">
+                    {{> "systems/super-sword-serial/templates/parts/die-shape.hbs" faces=die.faces}}
+                </button>
+                {{#if ../editable}}
+                <button type="button" class="sss-core-remove icon"
+                        data-action="removeCoreDie"
+                        data-die-id="{{die.id}}"
+                        data-tooltip="{{localize 'SSS.Challenge.RemoveDie'}}"
+                        aria-label="{{localize 'SSS.Challenge.RemoveDie'}}">
+                    <i class="fa-solid fa-xmark" inert></i>
+                </button>
+                {{/if}}
+            </li>
+            {{else}}
+            <li class="sss-empty">{{localize "SSS.Challenge.NoDice"}}</li>
+            {{/each}}
+        </ol>
+
+        {{#if editable}}
+        <div class="sss-core-controls">
+            <button type="button" data-action="addCoreDie" data-faces="6">
+                <i class="fa-solid fa-plus" inert></i>
+                <span>{{localize "SSS.Challenge.AddDie"}}</span>
+            </button>
+            <button type="button" data-action="addCoreToPool" {{#unless coreDice.length}}disabled{{/unless}}
+                    data-tooltip="{{localize 'SSS.Challenge.LoadTooltip'}}">
+                <i class="fa-solid fa-arrow-down" inert></i>
+                <span>{{localize "SSS.Challenge.Load"}}</span>
+            </button>
+        </div>
+        {{/if}}
+    </fieldset>
+
+    <fieldset>
+        <legend class="control">
+            {{localize "SSS.Actor.PC.Signatures"}}
+            {{#if editable}}
+            <button type="button" class="sss-add-item icon" data-action="createItem"
+                    data-item-type="signature"
+                    data-tooltip="{{localize 'SSS.Item.Signature.Add'}}"
+                    aria-label="{{localize 'SSS.Item.Signature.Add'}}">
+                <i class="fa-solid fa-plus" inert></i>
+            </button>
+            {{/if}}
+        </legend>
+        <ul class="sss-trait-list" data-items>
+            {{#each signatures as |item|}}
+            {{> "systems/super-sword-serial/templates/parts/item-trait-row.hbs"
+                item=item dieRatings=../dieRatings editable=../editable hasDie=true}}
+            {{else}}
+            <li class="sss-empty">{{localize "SSS.Item.Signature.Empty"}}</li>
+            {{/each}}
+        </ul>
+    </fieldset>
+
+    {{formGroup systemFields.description value=system.description enriched=enrichedDescription
+                toggled=true stacked=true rootId=rootId}}
+
+</section>

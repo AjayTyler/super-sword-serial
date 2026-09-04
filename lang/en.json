@@ -1,0 +1,272 @@
+{
+  "TYPES": {
+    "Actor": {
+      "pc": "Character",
+      "challenge": "Challenge"
+    },
+    "Item": {
+      "distinction": "Distinction",
+      "signature": "Signature Asset",
+      "talent": "Talent",
+      "complication": "Complication",
+      "trauma": "Trauma"
+    }
+  },
+  "SSS": {
+    "SystemName": "Super Sword Serial",
+    "EditImage": "Change image",
+    "Sheets": {
+      "Actor": "Character Sheet",
+      "Item": "Trait Sheet",
+      "Challenge": "Challenge Sheet"
+    },
+    "Tabs": {
+      "traits": "Traits",
+      "biography": "Biography"
+    },
+    "Doom": {
+      "Title": "Doom Pool",
+      "Add": "Add",
+      "AddSize": "Die size to add",
+      "AddTooltip": "Add a die to the Doom Pool",
+      "Roll": "Roll Doom",
+      "Reset": "Reset",
+      "ResetTitle": "Reset Doom Pool",
+      "ResetConfirm": "Reset the Doom Pool to its starting dice?",
+      "Spend": "Spend this die",
+      "StepTooltip": "Click to step up, right-click to step down",
+      "DieLabel": "Doom",
+      "RollFlavor": "Doom Pool",
+      "Empty": "The Doom Pool is empty.",
+      "EmptyHint": "No doom yet.",
+      "Hint": "Grows when players roll hitches. Spend dice to complicate a scene or oppose a roll.",
+      "PlayerHint": "The GM's Doom Pool. It grows when you roll hitches."
+    },
+    "Pool": {
+      "Title": "Dice Pool",
+      "Roll": "Roll",
+      "Clear": "Clear",
+      "Keep": "Keep",
+      "Remove": "Remove from pool",
+      "AddLoose": "Add die",
+      "AddLooseTooltip": "Add a die not tied to a trait, for SFX that simply grant one.",
+      "LooseDie": "Bonus die",
+      "AddTooltip": "Add to the dice pool",
+      "StepTooltip": "Click to step up, right-click to step down",
+      "TakeD4Tooltip": "Take d4 instead and gain a Plot Point",
+      "TookD4": "{name} added at d4. Gained a Plot Point.",
+      "Empty": "The dice pool is empty.",
+      "EmptyHint": "Click a trait to add its die.",
+      "RollFlavor": "Action roll"
+    },
+    "Die": {
+      "Label": "Die",
+      "Rating": "d{faces}"
+    },
+    "Roll": {
+      "Total": "Total",
+      "Effect": "Effect",
+      "UseAsEffect": "Use as Effect Die",
+      "Suggest": "Suggest",
+      "Commit": "Commit",
+      "Committed": "Assignment committed.",
+      "Hint": "Click dice to set your Total. Click the burst to choose an Effect Die.",
+      "HitchOne": "1 hitch — the GM may award a Plot Point or grow the Doom Pool.",
+      "HitchMany": "{count} hitches — the GM may award Plot Points or grow the Doom Pool."
+    },
+    "SFX": {
+      "Label": "SFX",
+      "Plural": "SFX",
+      "NewName": "New SFX",
+      "Name": "Name",
+      "Trigger": "Trigger",
+      "TriggerPlaceholder": "When does it fire?",
+      "Cost": "PP",
+      "Effect": "Effect",
+      "EffectPlaceholder": "What does it do?",
+      "Add": "Add SFX",
+      "Delete": "Delete SFX",
+      "Empty": "No SFX yet."
+    },
+    "Actor": {
+      "PC": {
+        "NamePlaceholder": "Character name",
+        "PlotPointsTooltip": "Click to gain, right-click to spend",
+        "Distinctions": "Distinctions",
+        "Roles": "Roles",
+        "Attributes": "Attributes",
+        "Signatures": "Signature Assets",
+        "Talents": "Talents",
+        "Complications": "Complications",
+        "Traumas": "Trauma",
+        "FIELDS": {
+          "plotPoints": {
+            "label": "Plot Points",
+            "hint": "Spend to add dice, activate SFX, and bend the fiction."
+          },
+          "biography": {
+            "label": "Biography"
+          },
+          "roles": {
+            "label": "Roles",
+            "warrior": {
+              "label": "Warrior"
+            },
+            "sage": {
+              "label": "Sage"
+            },
+            "rogue": {
+              "label": "Rogue"
+            },
+            "bard": {
+              "label": "Bard"
+            }
+          },
+          "attributes": {
+            "label": "Attributes",
+            "agility": {
+              "label": "Agility"
+            },
+            "might": {
+              "label": "Might"
+            },
+            "grits": {
+              "label": "Grits"
+            },
+            "savvy": {
+              "label": "Savvy"
+            },
+            "wits": {
+              "label": "Wits"
+            },
+            "cool": {
+              "label": "Cool"
+            }
+          }
+        }
+      },
+      "Challenge": {
+        "FIELDS": {
+          "description": {
+            "label": "Description"
+          },
+          "round": {
+            "label": "Round"
+          },
+          "dice": {
+            "label": "Core Dice"
+          }
+        }
+      }
+    },
+    "Item": {
+      "NamePlaceholder": "Name",
+      "Edit": "Edit",
+      "Delete": "Delete",
+      "DeleteTitle": "Delete Trait",
+      "DeleteConfirm": "Delete <strong>{name}</strong>? This cannot be undone.",
+      "Distinction": {
+        "Add": "Add Distinction",
+        "Empty": "No Distinctions yet.",
+        "NewName": "New Distinction",
+        "FIELDS": {
+          "description": {
+            "label": "Description"
+          },
+          "die": {
+            "label": "Die",
+            "hint": "Rated d4 to d8. Taking d4 instead earns a Plot Point."
+          },
+          "sfx": {
+            "label": "SFX"
+          }
+        }
+      },
+      "Signature": {
+        "Add": "Add Signature Asset",
+        "Empty": "No Signature Assets yet.",
+        "NewName": "New Signature Asset",
+        "FIELDS": {
+          "description": {
+            "label": "Description"
+          },
+          "die": {
+            "label": "Die",
+            "hint": "Rated d6 to d12."
+          },
+          "sfx": {
+            "label": "SFX"
+          }
+        }
+      },
+      "Talent": {
+        "Add": "Add Talent",
+        "Empty": "No Talents yet.",
+        "NewName": "New Talent",
+        "FIELDS": {
+          "description": {
+            "label": "Description"
+          },
+          "sfx": {
+            "label": "SFX"
+          }
+        }
+      },
+      "Complication": {
+        "Add": "Add Complication",
+        "Empty": "No Complications.",
+        "NewName": "New Complication",
+        "FIELDS": {
+          "description": {
+            "label": "Description"
+          },
+          "die": {
+            "label": "Die",
+            "hint": "Rated d6 to d12. Stepped up by hitches and effect dice; removed by a recovery roll. Past d12 it becomes Trauma."
+          },
+          "sfx": {
+            "label": "SFX"
+          }
+        }
+      },
+      "Trauma": {
+        "Add": "Add Trauma",
+        "Empty": "No Trauma.",
+        "NewName": "New Trauma",
+        "FIELDS": {
+          "description": {
+            "label": "Description"
+          },
+          "die": {
+            "label": "Die",
+            "hint": "Lasting harm, rated d6 to d12. A recovery roll will not clear it."
+          },
+          "sfx": {
+            "label": "SFX"
+          }
+        }
+      }
+    },
+    "Challenge": {
+      "NamePlaceholder": "Challenge name",
+      "CoreDice": "Core Dice",
+      "CoreDie": "Core",
+      "Duration": "Duration",
+      "Difficulty": "Difficulty",
+      "Round": "Round",
+      "RoundTooltip": "Click to advance the round, right-click to go back",
+      "Notation": "Pool",
+      "Apply": "Set",
+      "ApplyTooltip": "Replace the core dice with this notation",
+      "NotationHint": "Count is duration, size is difficulty. Typically {typical} dice. Try 3d6 or 2d8 + d10.",
+      "BadNotation": "Could not read that pool. Try something like 3d6.",
+      "StepTooltip": "Click to step up, right-click to step down",
+      "RemoveDie": "Remove this die",
+      "AddDie": "Add die",
+      "NoDice": "No core dice.",
+      "Load": "Load into pool",
+      "LoadTooltip": "Add every core die to the dice pool",
+      "RollFlavor": "{name} acts"
+    }
+  }
+}

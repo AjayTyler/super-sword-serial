@@ -1,0 +1,96 @@
+{
+  "id": "super-sword-serial",
+  "title": "Super Sword Serial",
+  "description": "A 100% vibe-coded hack for personal use.",
+  "version": "0.1.0",
+  "type": "system",
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14.367"
+  },
+  "authors": [
+    {
+      "name": "Ajay"
+    }
+  ],
+  "url": "https://github.com/AjayTyler/super-sword-serial",
+  "readme": "https://github.com/AjayTyler/super-sword-serial/blob/develop/README.md",
+  "manifest": "https://github.com/AjayTyler/super-sword-serial/releases/latest/download/system.json",
+  "download": "https://github.com/AjayTyler/super-sword-serial/releases/download/v0.1.0/system.zip",
+  "esmodules": [
+    "sss.mjs"
+  ],
+  "styles": [
+    {
+      "src": "styles/sss.css"
+    }
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "media": [],
+  "packs": [],
+  "documentTypes": {
+    "Actor": {
+      "pc": {
+        "htmlFields": [
+          "biography"
+        ]
+      },
+      "challenge": {
+        "htmlFields": [
+          "description"
+        ]
+      }
+    },
+    "Item": {
+      "distinction": {
+        "htmlFields": [
+          "description"
+        ]
+      },
+      "signature": {
+        "htmlFields": [
+          "description"
+        ]
+      },
+      "talent": {
+        "htmlFields": [
+          "description"
+        ]
+      },
+      "complication": {
+        "htmlFields": [
+          "description"
+        ]
+      },
+      "trauma": {
+        "htmlFields": [
+          "description"
+        ]
+      }
+    }
+  },
+  "grid": {
+    "distance": 1,
+    "units": "sq"
+  },
+  "flags": {
+    "hotReload": {
+      "extensions": [
+        "css",
+        "hbs",
+        "json"
+      ],
+      "paths": [
+        "styles",
+        "templates",
+        "lang"
+      ]
+    }
+  }
+}

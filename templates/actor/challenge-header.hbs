@@ -1,0 +1,35 @@
+{{!--
+  Challenge header: name, plus the two numbers that describe it at a glance.
+
+  Duration is how many dice remain; difficulty is the largest. Both are derived, not
+  editable -- they change by adding, stepping, and removing core dice below.
+--}}
+<header class="sss-header">
+    <img class="sss-portrait" src="{{source.img}}" data-action="editImage" data-edit="img"
+         alt="{{document.name}}" data-tooltip="{{localize 'SSS.EditImage'}}">
+
+    <div class="sss-header-fields">
+        <input class="sss-name" name="name" type="text" value="{{source.name}}"
+               placeholder="{{localize 'SSS.Challenge.NamePlaceholder'}}"
+               aria-label="{{localize 'SSS.Challenge.NamePlaceholder'}}">
+
+        <div class="sss-challenge-stats">
+            <div class="sss-stat">
+                <span class="sss-stat-label">{{localize "SSS.Challenge.Duration"}}</span>
+                <span class="sss-stat-value">{{duration}}</span>
+            </div>
+            <div class="sss-stat">
+                <span class="sss-stat-label">{{localize "SSS.Challenge.Difficulty"}}</span>
+                <span class="sss-stat-value">{{#if difficulty}}d{{difficulty}}{{else}}&mdash;{{/if}}</span>
+            </div>
+            <div class="sss-stat">
+                <span class="sss-stat-label">{{localize "SSS.Challenge.Round"}}</span>
+                <button type="button" class="sss-stat-value sss-round" data-action="advanceRound"
+                        data-tooltip="{{localize 'SSS.Challenge.RoundTooltip'}}"
+                        aria-label="{{localize 'SSS.Challenge.RoundTooltip'}}">
+                    {{system.round}}
+                </button>
+            </div>
+        </div>
+    </div>
+</header>

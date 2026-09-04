@@ -1,0 +1,27 @@
+{{!--
+  A rated trait that lives on the Actor (a Role or an Attribute).
+
+  Expects: trait {name, path, die}, dieRatings, editable
+
+  The name is a button that adds the trait to the pool; the die is a select that edits the
+  rating. Keeping those on separate controls avoids a click meaning two things.
+--}}
+<li class="sss-trait-row">
+    <button type="button" class="sss-trait-add"
+            data-action="addTraitDie"
+            data-faces="{{trait.die}}"
+            data-trait-name="{{trait.name}}"
+            data-trait-id="{{trait.key}}"
+            data-trait-type="{{traitType}}"
+            data-tooltip="{{localize 'SSS.Pool.AddTooltip'}}">
+        {{trait.name}}
+    </button>
+
+    <select name="{{trait.path}}" data-dtype="Number" class="sss-die-select"
+            aria-label="{{trait.name}} {{localize 'SSS.Die.Label'}}"
+            {{#unless editable}}disabled{{/unless}}>
+        {{#each dieRatings as |faces|}}
+        <option value="{{faces}}" {{#if (eq faces ../trait.die)}}selected{{/if}}>d{{faces}}</option>
+        {{/each}}
+    </select>
+</li>

@@ -1,0 +1,48 @@
+{{!--
+  Everything below the item header, in a single scroll container.
+
+  Deliberately one PART rather than separate details and SFX parts: each PART gets its own
+  scrollable region, so splitting them produced two independent scrollbars in one small
+  window, which is unpleasant to navigate. One part means one scrollbar.
+--}}
+<section class="sss-item-body scrollable">
+
+    {{#if hasDie}}
+    <div class="form-group">
+        <label for="{{rootId}}-die">{{localize "SSS.Die.Label"}}</label>
+        <div class="form-fields">
+            <select id="{{rootId}}-die" name="system.die" data-dtype="Number">
+                {{#each dieRatings as |faces|}}
+                <option value="{{faces}}" {{#if (eq faces ../system.die)}}selected{{/if}}>d{{faces}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <p class="hint">{{localize systemFields.die.hint}}</p>
+    </div>
+    {{/if}}
+
+    {{formGroup systemFields.description value=system.description enriched=enrichedDescription
+                toggled=true stacked=true rootId=rootId}}
+
+    <fieldset>
+        <legend class="control">
+            {{localize "SSS.SFX.Plural"}}
+            {{#if editable}}
+            <button type="button" class="sss-add-item icon" data-action="addSFX"
+                    data-tooltip="{{localize 'SSS.SFX.Add'}}"
+                    aria-label="{{localize 'SSS.SFX.Add'}}">
+                <i class="fa-solid fa-plus" inert></i>
+            </button>
+            {{/if}}
+        </legend>
+
+        <ol class="sss-sfx-list">
+            {{#each sfx as |entry index|}}
+            {{> "systems/super-sword-serial/templates/parts/sfx-row.hbs" sfx=entry index=index}}
+            {{else}}
+            <li class="sss-empty">{{localize "SSS.SFX.Empty"}}</li>
+            {{/each}}
+        </ol>
+    </fieldset>
+
+</section>

@@ -1,0 +1,38 @@
+{{!--
+  One editable SFX.
+
+  Input names carry the array index (system.sfx.0.name). The item sheet's _processFormData
+  turns those back into an array on submit -- expandObject produces an index-keyed object,
+  which an ArrayField will not accept.
+--}}
+<li class="sss-sfx-row" data-sfx-index="{{index}}">
+
+    <div class="sss-sfx-head">
+        <input type="text" name="system.sfx.{{index}}.name" value="{{sfx.name}}"
+               placeholder="{{localize 'SSS.SFX.Name'}}"
+               aria-label="{{localize 'SSS.SFX.Name'}}">
+
+        <label class="sss-sfx-cost-field">
+            <span>{{localize "SSS.SFX.Cost"}}</span>
+            <input type="number" name="system.sfx.{{index}}.cost" value="{{sfx.cost}}"
+                   min="0" step="1" data-dtype="Number"
+                   aria-label="{{localize 'SSS.SFX.Cost'}}">
+        </label>
+
+        <button type="button" class="sss-row-control icon" data-action="deleteSFX"
+                data-sfx-index="{{index}}"
+                data-tooltip="{{localize 'SSS.SFX.Delete'}}"
+                aria-label="{{localize 'SSS.SFX.Delete'}}">
+            <i class="fa-solid fa-trash" inert></i>
+        </button>
+    </div>
+
+    <input type="text" name="system.sfx.{{index}}.trigger" value="{{sfx.trigger}}"
+           placeholder="{{localize 'SSS.SFX.TriggerPlaceholder'}}"
+           aria-label="{{localize 'SSS.SFX.Trigger'}}">
+
+    <textarea name="system.sfx.{{index}}.effect" rows="2"
+              placeholder="{{localize 'SSS.SFX.EffectPlaceholder'}}"
+              aria-label="{{localize 'SSS.SFX.Effect'}}">{{sfx.effect}}</textarea>
+
+</li>

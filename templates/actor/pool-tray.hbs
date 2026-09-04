@@ -1,0 +1,73 @@
+{{!--
+  The pending dice pool, pinned to the bottom of the sheet.
+
+  Sits outside the tab sections so dice can be added from any tab without losing sight of
+  what has been assembled.
+
+  <details data-sync> is used deliberately: Foundry preserves the open/closed state of a
+  details element carrying data-sync across re-renders, and the tray re-renders on every
+  pool change. Without it the tray would snap shut each time a die was added.
+--}}
+<details class="sss-pool-tray" data-sync="sss-pool-tray" {{#if poolCount}}open{{/if}}>
+
+    <summary class="sss-pool-summary">
+        <i class="fa-solid fa-dice" inert></i>
+        <span class="sss-pool-title">{{localize "SSS.Pool.Title"}}</span>
+        <span class="sss-pool-count">{{poolCount}}</span>
+    </summary>
+
+    <div class="sss-pool-body">
+
+        <ol class="sss-pool-dice">
+            {{#each pool.entries as |entry|}}
+            <li class="sss-pool-entry">
+                <button type="button" class="sss-pool-die {{#if (ne entry.faces entry.baseFaces)}}is-stepped{{/if}}"
+                        data-action="stepPoolDie"
+                        data-entry-id="{{entry.id}}"
+                        data-tooltip="{{localize 'SSS.Pool.StepTooltip'}}"
+                        aria-label="{{entry.traitName}} d{{entry.faces}}, {{localize 'SSS.Pool.StepTooltip'}}">
+                    {{> "systems/super-sword-serial/templates/parts/die-shape.hbs" faces=entry.faces}}
+                </button>
+                <button type="button" class="sss-pool-remove icon"
+                        data-action="removePoolDie"
+                        data-entry-id="{{entry.id}}"
+                        data-tooltip="{{localize 'SSS.Pool.Remove'}}"
+                        aria-label="{{localize 'SSS.Pool.Remove'}}">
+                    <i class="fa-solid fa-xmark" inert></i>
+                </button>
+                <span class="sss-pool-trait">{{entry.traitName}}</span>
+            </li>
+            {{else}}
+            <li class="sss-empty">{{localize "SSS.Pool.EmptyHint"}}</li>
+            {{/each}}
+        </ol>
+
+        <div class="sss-pool-controls">
+            <button type="button" class="sss-pool-loose" data-action="addLooseDie" data-faces="6"
+                    data-tooltip="{{localize 'SSS.Pool.AddLooseTooltip'}}">
+                <i class="fa-solid fa-plus" inert></i>
+                <span>{{localize "SSS.Pool.AddLoose"}}</span>
+            </button>
+
+            <label class="sss-pool-keep">
+                <span>{{localize "SSS.Pool.Keep"}}</span>
+                <input type="number" name="flags.super-sword-serial.pool.keepCount"
+                       value="{{pool.keepCount}}" min="1" max="10" step="1" data-dtype="Number"
+                       aria-label="{{localize 'SSS.Pool.Keep'}}">
+            </label>
+
+            <button type="button" class="sss-pool-clear" data-action="clearPool"
+                    {{#unless poolCount}}disabled{{/unless}}>
+                <i class="fa-solid fa-eraser" inert></i>
+                <span>{{localize "SSS.Pool.Clear"}}</span>
+            </button>
+
+            <button type="button" class="sss-pool-roll" data-action="rollPool"
+                    {{#unless poolCount}}disabled{{/unless}}>
+                <i class="fa-solid fa-dice-d20" inert></i>
+                <span>{{localize "SSS.Pool.Roll"}}</span>
+            </button>
+        </div>
+
+    </div>
+</details>

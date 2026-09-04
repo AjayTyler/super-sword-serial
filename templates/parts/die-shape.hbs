@@ -1,0 +1,16 @@
+{{!--
+  A die drawn as its polyhedral shape.
+
+  Expects: faces
+  Optional: value  -- the rolled result, shown large beside the shape
+
+  The shape carries the size, so no "d8" text is needed. A small numeral rides alongside
+  it because d8, d10, and d12 outlines are hard to tell apart at this size.
+
+  MODDERS: glyphs are mapped in SSS.DIE_ICONS (module/config.mjs) and resolved by the
+  sssDieIcon Handlebars helper.
+--}}
+<span class="sss-shape" aria-hidden="true">
+    <i class="fa-solid {{sssDieIcon faces}}" inert></i>
+    <span class="sss-shape-size">{{faces}}</span>
+</span>

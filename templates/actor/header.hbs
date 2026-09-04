@@ -1,0 +1,25 @@
+{{!--
+  Sheet header: portrait, name, and the Plot Point counter.
+
+  data-action="editImage" with data-edit is a built-in DocumentSheetV2 action -- it opens
+  the FilePicker for you.
+--}}
+<header class="sss-header">
+    <img class="sss-portrait" src="{{source.img}}" data-action="editImage" data-edit="img"
+         alt="{{document.name}}" data-tooltip="{{localize 'SSS.EditImage'}}">
+
+    <div class="sss-header-fields">
+        <input class="sss-name" name="name" type="text" value="{{source.name}}"
+               placeholder="{{localize 'SSS.Actor.PC.NamePlaceholder'}}"
+               aria-label="{{localize 'SSS.Actor.PC.NamePlaceholder'}}">
+
+        <div class="sss-plot-points">
+            <span class="sss-pp-label">{{localize "SSS.Actor.PC.FIELDS.plotPoints.label"}}</span>
+            <button type="button" class="sss-pp-value" data-action="adjustPlotPoints"
+                    data-tooltip="{{localize 'SSS.Actor.PC.PlotPointsTooltip'}}"
+                    aria-label="{{localize 'SSS.Actor.PC.PlotPointsTooltip'}}">
+                {{system.plotPoints}}
+            </button>
+        </div>
+    </div>
+</header>

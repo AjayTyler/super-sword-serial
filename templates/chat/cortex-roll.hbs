@@ -1,0 +1,85 @@
+{{!--
+  Cortex roll card.
+
+  MODDERS: the `data-action` values here are matched by module/dice/chat.mjs. Rearrange
+  freely, but keep data-action and data-die-index on the die buttons.
+--}}
+<div class="sss-roll" data-message-id="{{messageId}}">
+
+    {{#if flavor}}<div class="sss-roll-flavor">{{flavor}}</div>{{/if}}
+
+    <div class="sss-roll-formula">{{formula}}</div>
+
+    <ol class="sss-pool">
+        {{#each dice}}
+        <li class="sss-die-slot">
+            <button type="button"
+                    class="sss-die d{{faces}} {{#if hitch}}is-hitch{{/if}} {{#if inTotal}}is-total{{/if}} {{#if isEffect}}is-effect{{/if}}"
+                    data-action="{{#unless hitch}}sssToggleTotal{{/unless}}"
+                    data-die-index="{{index}}"
+                    {{#if hitch}}disabled{{/if}}
+                    {{#unless ../canChoose}}disabled{{/unless}}
+                    data-tooltip="{{trait}} (d{{faces}})"
+                    aria-label="{{trait}} d{{faces}}, rolled {{value}}">
+                <span class="sss-die-value">{{value}}</span>
+                {{> "systems/super-sword-serial/templates/parts/die-shape.hbs" faces=faces}}
+            </button>
+            {{#unless hitch}}
+            {{#if ../canChoose}}
+            <button type="button"
+                    class="sss-effect-pick {{#if isEffect}}is-effect{{/if}}"
+                    data-action="sssToggleEffect"
+                    data-die-index="{{index}}"
+                    data-tooltip="{{localize 'SSS.Roll.UseAsEffect'}}"
+                    aria-label="{{localize 'SSS.Roll.UseAsEffect'}}">
+                <i class="fa-solid fa-burst" inert></i>
+            </button>
+            {{/if}}
+            {{/unless}}
+            <span class="sss-die-trait">{{trait}}</span>
+        </li>
+        {{/each}}
+    </ol>
+
+    <div class="sss-roll-summary">
+        <div class="sss-summary-block">
+            <span class="sss-summary-label">{{localize "SSS.Roll.Total"}}</span>
+            <span class="sss-summary-value">{{cortexTotal}}</span>
+            <span class="sss-summary-note">{{keptCount}}/{{keepCount}}</span>
+        </div>
+        <div class="sss-summary-block">
+            <span class="sss-summary-label">{{localize "SSS.Roll.Effect"}}</span>
+            <span class="sss-summary-value">{{#if effectFaces}}d{{effectFaces}}{{else}}&mdash;{{/if}}</span>
+        </div>
+    </div>
+
+    {{#if hitchCount}}
+    <div class="sss-hitches">
+        <i class="fa-solid fa-triangle-exclamation" inert></i>
+        {{#if (eq hitchCount 1)}}
+        {{localize "SSS.Roll.HitchOne"}}
+        {{else}}
+        {{localize "SSS.Roll.HitchMany" count=hitchCount}}
+        {{/if}}
+    </div>
+    {{/if}}
+
+    {{#if canChoose}}
+    <div class="sss-roll-controls">
+        <p class="sss-roll-hint">{{localize "SSS.Roll.Hint"}}</p>
+        <div class="sss-roll-buttons">
+            <button type="button" data-action="sssSuggest">
+                <i class="fa-solid fa-wand-magic-sparkles" inert></i>
+                <span>{{localize "SSS.Roll.Suggest"}}</span>
+            </button>
+            <button type="button" data-action="sssCommit">
+                <i class="fa-solid fa-check" inert></i>
+                <span>{{localize "SSS.Roll.Commit"}}</span>
+            </button>
+        </div>
+    </div>
+    {{else if locked}}
+    <p class="sss-roll-locked">{{localize "SSS.Roll.Committed"}}</p>
+    {{/if}}
+
+</div>

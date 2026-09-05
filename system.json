@@ -2,7 +2,7 @@
   "id": "super-sword-serial",
   "title": "Super Sword Serial",
   "description": "A Cortex Prime hack. Distinctions, Roles, and Attributes as prime sets, with Signature Assets and Talents as bonus traits.",
-  "version": "0.1.0",
+  "version": "0.1.01",
   "type": "system",
   "compatibility": {
     "minimum": "14",

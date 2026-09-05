@@ -1,0 +1,21 @@
+{{!--
+  A scene-wide complication or asset, for adding to this actor's pool.
+
+  Expects: trait {id, name, faces, category}
+
+  Read-only here -- renaming, restepping, and removing a scene trait happens in the Scene
+  Traits app, since it belongs to the scene, not to whichever sheet happens to be open.
+--}}
+<li class="sss-trait-row sss-scene-trait-row" data-category="{{trait.category}}">
+    <button type="button" class="sss-trait-add"
+            data-action="addTraitDie"
+            data-faces="{{trait.faces}}"
+            data-trait-name="{{trait.name}}"
+            data-trait-id="{{trait.id}}"
+            data-trait-type="scene"
+            data-tooltip="{{localize 'SSS.Pool.AddTooltip'}}">
+        <i class="fa-solid {{#if (eq trait.category "asset")}}fa-chevron-up{{else}}fa-chevron-down{{/if}}" inert></i>
+        {{trait.name}}
+    </button>
+    {{> "systems/super-sword-serial/templates/parts/die-shape.hbs" faces=trait.faces}}
+</li>

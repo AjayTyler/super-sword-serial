@@ -1,7 +1,7 @@
 {
   "id": "super-sword-serial",
   "title": "Super Sword Serial",
-  "description": "A 100% vibe-coded hack for personal use.",
+  "description": "A Cortex Prime hack. Distinctions, Roles, and Attributes as prime sets, with Signature Assets and Talents as bonus traits.",
   "version": "0.1.0",
   "type": "system",
   "compatibility": {
@@ -14,6 +14,7 @@
     }
   ],
   "url": "https://github.com/AjayTyler/super-sword-serial",
+  "bugs": "https://github.com/AjayTyler/super-sword-serial/issues",
   "readme": "https://github.com/AjayTyler/super-sword-serial/blob/develop/README.md",
   "manifest": "https://github.com/AjayTyler/super-sword-serial/releases/latest/download/system.json",
   "download": "https://github.com/AjayTyler/super-sword-serial/releases/download/v0.1.0/system.zip",

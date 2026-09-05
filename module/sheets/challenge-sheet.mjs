@@ -13,6 +13,7 @@ import { SSS } from "../config.mjs";
 import { rollCortexPool } from "../dice/_module.mjs";
 import * as Pool from "../dice/pool.mjs";
 import { parseDiceNotation, formatDiceNotation, snapDie } from "../dice/notation.mjs";
+import { getSceneTraits } from "../apps/scene-traits.mjs";
 
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
@@ -50,6 +51,7 @@ export class SSSChallengeSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
       template: "systems/super-sword-serial/templates/actor/challenge-body.hbs",
       templates: [
         "systems/super-sword-serial/templates/parts/item-trait-row.hbs",
+        "systems/super-sword-serial/templates/parts/scene-trait-row.hbs",
         "systems/super-sword-serial/templates/parts/die-shape.hbs"
       ],
       scrollable: [""]
@@ -78,6 +80,7 @@ export class SSSChallengeSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
     context.typicalSize = SSS.CHALLENGE_DICE_TYPICAL;
 
     context.signatures = actor.itemTypes.signature;
+    context.sceneTraits = getSceneTraits();
 
     context.pool = Pool.getPool(actor);
     context.poolCount = context.pool.entries.length;

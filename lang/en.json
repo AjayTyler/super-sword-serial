@@ -42,6 +42,23 @@
       "Hint": "Grows when players roll hitches. Spend dice to complicate a scene or oppose a roll.",
       "PlayerHint": "The GM's Doom Pool. It grows when you roll hitches."
     },
+    "SceneTraits": {
+      "Title": "Scene Traits",
+      "SectionTitle": "Scene",
+      "Add": "Add",
+      "AddNamePlaceholder": "Name",
+      "Category": {
+        "Label": "Category",
+        "complication": "Complication",
+        "asset": "Asset"
+      },
+      "NeedName": "Give the scene trait a name first.",
+      "StepTooltip": "Click to step up, right-click to step down",
+      "Remove": "Remove from the scene",
+      "EmptyHint": "Nothing complicating this scene yet.",
+      "Hint": "Visible to every player. Any actor can add one of these dice to their pool from their own sheet.",
+      "PlayerHint": "Complications and assets active in this scene. Add one to your pool from your own sheet."
+    },
     "Pool": {
       "Title": "Dice Pool",
       "Roll": "Roll",

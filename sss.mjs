@@ -15,6 +15,9 @@ import { parseDiceNotation, formatDiceNotation } from "./module/dice/notation.mj
 import {
   DoomPoolApp, registerDoomPoolSetting, registerDoomPoolControl, getDoomPool
 } from "./module/apps/doom-pool.mjs";
+import {
+  SceneTraitsApp, registerSceneTraitsControl, registerSceneTraitsHooks, getSceneTraits
+} from "./module/apps/scene-traits.mjs";
 
 export const SYSTEM_ID = "super-sword-serial";
 
@@ -71,6 +74,10 @@ Hooks.once("init", () => {
   registerDoomPoolSetting();
   registerDoomPoolControl();
 
+  // Scene Traits: a per-scene flag plus a GM-only toggle, kept in sync with open sheets.
+  registerSceneTraitsControl();
+  registerSceneTraitsHooks();
+
   // Public API for macros and modules.
   game.sss = {
     CortexRoll,
@@ -78,6 +85,8 @@ Hooks.once("init", () => {
     Pool,
     getDoomPool,
     openDoomPool: () => new DoomPoolApp().render({ force: true }),
+    getSceneTraits,
+    openSceneTraits: () => new SceneTraitsApp().render({ force: true }),
     parseDiceNotation,
     formatDiceNotation,
 

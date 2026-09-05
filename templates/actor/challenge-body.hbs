@@ -89,6 +89,17 @@
         </ul>
     </fieldset>
 
+    <fieldset>
+        <legend>{{localize "SSS.SceneTraits.SectionTitle"}}</legend>
+        <ul class="sss-trait-list" data-items>
+            {{#each sceneTraits as |trait|}}
+            {{> "systems/super-sword-serial/templates/parts/scene-trait-row.hbs" trait=trait}}
+            {{else}}
+            <li class="sss-empty">{{localize "SSS.SceneTraits.EmptyHint"}}</li>
+            {{/each}}
+        </ul>
+    </fieldset>
+
     {{formGroup systemFields.description value=system.description enriched=enrichedDescription
                 toggled=true stacked=true rootId=rootId}}
 

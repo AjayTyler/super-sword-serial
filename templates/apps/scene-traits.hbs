@@ -1,0 +1,68 @@
+{{!--
+  Scene Traits: the complications and assets currently in play for this scene.
+
+  Read-only for players; the GM adds, steps, and removes entries here. Any actor adds one
+  to their pool from their own sheet's Scene fieldset, not from this window.
+--}}
+<div class="sss-scene-traits-body standard-form">
+
+    {{#if sceneName}}
+    <p class="sss-scene-name">{{sceneName}}</p>
+    {{/if}}
+
+    <ol class="sss-scene-trait-list">
+        {{#each traits as |trait|}}
+        <li class="sss-scene-trait-entry" data-category="{{trait.category}}">
+            <i class="sss-scene-trait-icon fa-solid {{#if (eq trait.category "asset")}}fa-chevron-up{{else}}fa-chevron-down{{/if}}" inert></i>
+            <span class="sss-scene-trait-name">{{trait.name}}</span>
+            <button type="button" class="sss-scene-trait-die"
+                    data-action="stepSceneTrait"
+                    data-trait-id="{{trait.id}}"
+                    {{#unless ../isGM}}disabled{{/unless}}
+                    data-tooltip="{{localize 'SSS.SceneTraits.StepTooltip'}}"
+                    aria-label="d{{trait.faces}}, {{localize 'SSS.SceneTraits.StepTooltip'}}">
+                {{> "systems/super-sword-serial/templates/parts/die-shape.hbs" faces=trait.faces}}
+            </button>
+            {{#if ../isGM}}
+            <button type="button" class="sss-scene-trait-remove icon"
+                    data-action="removeSceneTrait"
+                    data-trait-id="{{trait.id}}"
+                    data-tooltip="{{localize 'SSS.SceneTraits.Remove'}}"
+                    aria-label="{{localize 'SSS.SceneTraits.Remove'}}">
+                <i class="fa-solid fa-xmark" inert></i>
+            </button>
+            {{/if}}
+        </li>
+        {{else}}
+        <li class="sss-empty">{{localize "SSS.SceneTraits.EmptyHint"}}</li>
+        {{/each}}
+    </ol>
+
+    {{#if isGM}}
+    <div class="sss-scene-trait-controls">
+        <div class="sss-scene-trait-add">
+            <input type="text" name="sceneTraitName"
+                   placeholder="{{localize 'SSS.SceneTraits.AddNamePlaceholder'}}"
+                   aria-label="{{localize 'SSS.SceneTraits.AddNamePlaceholder'}}">
+            <select name="sceneTraitFaces" aria-label="{{localize 'SSS.Die.Label'}}">
+                {{#each dieRatings as |faces|}}
+                <option value="{{faces}}" {{#if (eq faces 6)}}selected{{/if}}>d{{faces}}</option>
+                {{/each}}
+            </select>
+            <select name="sceneTraitCategory" aria-label="{{localize 'SSS.SceneTraits.Category.Label'}}">
+                {{#each categories as |category|}}
+                <option value="{{category}}">{{localize (concat "SSS.SceneTraits.Category." category)}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <button type="button" data-action="addSceneTrait">
+            <i class="fa-solid fa-plus" inert></i>
+            <span>{{localize "SSS.SceneTraits.Add"}}</span>
+        </button>
+        <p class="hint">{{localize "SSS.SceneTraits.Hint"}}</p>
+    </div>
+    {{else}}
+    <p class="hint">{{localize "SSS.SceneTraits.PlayerHint"}}</p>
+    {{/if}}
+
+</div>

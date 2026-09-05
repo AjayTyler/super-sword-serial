@@ -28,7 +28,7 @@ const KEY = "pool";
  * @property {number} baseFaces    Size when added, so stepping can be shown and reverted.
  * @property {string} traitName    Display label.
  * @property {string} [traitId]    Source trait key or Item id.
- * @property {string} [traitType]  "distinction" | "role" | "attribute" | "signature" | "loose"
+ * @property {string} [traitType]  "distinction" | "role" | "attribute" | "signature" | "scene" | "loose"
  */
 
 /**

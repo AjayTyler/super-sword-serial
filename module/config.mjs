@@ -66,6 +66,14 @@ SSS.COMPLICATION_DIE_MIN = 6;
 SSS.DOOM_POOL_START = [6, 6];
 
 /**
+ * Scene-wide complications and assets are tagged with one of these for display only --
+ * mechanically both are just a die any actor may add to their pool, so there is no separate
+ * schema or logic per category.
+ * @type {string[]}
+ */
+SSS.SCENE_TRAIT_CATEGORIES = ["complication", "asset"];
+
+/**
  * Starting pool for a new Challenge. Count is duration, size is difficulty, so 3d6 is a
  * short, easy problem -- a sensible blank slate.
  */

@@ -13,6 +13,7 @@
 import { SSS } from "../config.mjs";
 import { rollCortexPool } from "../dice/_module.mjs";
 import * as Pool from "../dice/pool.mjs";
+import { getSceneTraits } from "../apps/scene-traits.mjs";
 
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
@@ -52,7 +53,9 @@ export class SSSActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
       template: "systems/super-sword-serial/templates/actor/traits.hbs",
       templates: [
         "systems/super-sword-serial/templates/parts/trait-row.hbs",
-        "systems/super-sword-serial/templates/parts/item-trait-row.hbs"
+        "systems/super-sword-serial/templates/parts/item-trait-row.hbs",
+        "systems/super-sword-serial/templates/parts/scene-trait-row.hbs",
+        "systems/super-sword-serial/templates/parts/die-shape.hbs"
       ],
       scrollable: [""]
     },
@@ -101,6 +104,7 @@ export class SSSActorSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
     context.talents = actor.itemTypes.talent;
     context.complications = actor.itemTypes.complication;
     context.traumas = actor.itemTypes.trauma;
+    context.sceneTraits = getSceneTraits();
 
     context.pool = Pool.getPool(actor);
     context.poolCount = context.pool.entries.length;

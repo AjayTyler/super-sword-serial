@@ -641,6 +641,107 @@
 }
 
 /* -------------------------------------------- */
+/*  Scene Traits                                */
+/* -------------------------------------------- */
+
+.sss-scene-traits-body {
+    padding: var(--spacer-12);
+}
+
+.sss-scene-name {
+    margin: 0 0 var(--spacer-8);
+    font-weight: bold;
+    text-align: center;
+    color: var(--color-text-subtle);
+}
+
+.sss .sss-scene-trait-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacer-4);
+    margin: 0 0 var(--spacer-8);
+    padding: 0;
+    list-style: none;
+}
+
+.sss-scene-trait-entry {
+    display: flex;
+    align-items: center;
+    gap: var(--spacer-4);
+}
+
+.sss-scene-trait-icon {
+    flex: 0 0 auto;
+    color: var(--color-text-subtle);
+}
+
+.sss-scene-trait-entry[data-category="asset"] .sss-scene-trait-icon {
+    color: var(--color-level-success, #18520b);
+}
+
+.sss-scene-trait-entry[data-category="complication"] .sss-scene-trait-icon {
+    color: var(--color-level-error, #ce0707);
+}
+
+.sss-scene-trait-name {
+    flex: 1;
+    font-weight: bold;
+}
+
+.sss .sss-scene-trait-die {
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: 2px solid var(--color-border);
+    border-radius: 6px;
+    font-size: var(--font-size-14);
+    font-weight: bold;
+}
+
+.sss .sss-scene-trait-remove {
+    --button-size: 1.25rem;
+    --button-background-color: transparent;
+    --button-border-color: transparent;
+    flex: 0 0 1.25rem;
+    font-size: var(--font-size-10);
+}
+
+.sss-scene-trait-controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacer-8);
+}
+
+.sss .sss-scene-trait-add {
+    display: flex;
+    gap: var(--spacer-4);
+}
+
+.sss .sss-scene-trait-add input[type="text"] {
+    flex: 1;
+}
+
+.sss .sss-scene-trait-add select {
+    flex: 0 0 4.5rem;
+    text-align: center;
+}
+
+/* In the actor/challenge trait list, a scene trait reads like any other trait row, plus a
+   category icon and a read-only die shape -- editing that die lives in the Scene Traits app. */
+.sss .sss-scene-trait-row .sss-trait-add i {
+    margin-right: var(--spacer-2);
+    color: var(--color-text-subtle);
+}
+
+.sss .sss-scene-trait-row[data-category="asset"] .sss-trait-add i {
+    color: var(--color-level-success, #18520b);
+}
+
+.sss .sss-scene-trait-row[data-category="complication"] .sss-trait-add i {
+    color: var(--color-level-error, #ce0707);
+}
+
+/* -------------------------------------------- */
 /*  Challenge sheet                             */
 /* -------------------------------------------- */
 
@@ -734,7 +835,8 @@
 /* Die shapes stand in for the old "d6" text on every pooled die. */
 .sss .sss-pool-die .sss-shape,
 .sss .sss-doom-die .sss-shape,
-.sss .sss-core-die .sss-shape {
+.sss .sss-core-die .sss-shape,
+.sss .sss-scene-trait-die .sss-shape {
     flex-direction: column;
     gap: 0;
     color: inherit;
@@ -743,6 +845,7 @@
 
 .sss .sss-pool-die .sss-shape > i,
 .sss .sss-doom-die .sss-shape > i,
-.sss .sss-core-die .sss-shape > i {
+.sss .sss-core-die .sss-shape > i,
+.sss .sss-scene-trait-die .sss-shape > i {
     font-size: 1.6em;
 }

@@ -2,7 +2,7 @@
   "id": "super-sword-serial",
   "title": "Super Sword Serial",
   "description": "A Cortex Prime hack. Distinctions, Roles, and Attributes as prime sets, with Signature Assets and Talents as bonus traits.",
-  "version": "0.1.01",
+  "version": "0.1.02",
   "type": "system",
   "compatibility": {
     "minimum": "14",
@@ -17,7 +17,7 @@
   "bugs": "https://github.com/AjayTyler/super-sword-serial/issues",
   "readme": "https://github.com/AjayTyler/super-sword-serial/blob/develop/README.md",
   "manifest": "https://github.com/AjayTyler/super-sword-serial/releases/latest/download/system.json",
-  "download": "https://github.com/AjayTyler/super-sword-serial/releases/download/v0.1.01/system.zip",
+  "download": "https://github.com/AjayTyler/super-sword-serial/releases/download/v0.1.02/system.zip",
   "esmodules": [
     "sss.mjs"
   ],

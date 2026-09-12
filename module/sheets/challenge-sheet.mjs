@@ -33,6 +33,7 @@ export class SSSChallengeSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
       removeCoreDie: SSSChallengeSheet.#onRemoveCoreDie,
       addCoreToPool: SSSChallengeSheet.#onAddCoreToPool,
       addTraitDie: SSSChallengeSheet.#onAddTraitDie,
+      addLooseDie: SSSChallengeSheet.#onAddLooseDie,
       stepPoolDie: { handler: SSSChallengeSheet.#onStepPoolDie, buttons: [0, 2] },
       removePoolDie: SSSChallengeSheet.#onRemovePoolDie,
       clearPool: SSSChallengeSheet.#onClearPool,
@@ -200,6 +201,15 @@ export class SSSChallengeSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
       traitName,
       traitId: traitId ?? null,
       traitType: traitType ?? null
+    });
+  }
+
+  /** Add a die not tied to any trait, for SFX that simply grant one. */
+  static async #onAddLooseDie(event, target) {
+    await Pool.addDie(this.actor, {
+      faces: Number(target.dataset.faces) || SSS.DIE_MIN,
+      traitName: game.i18n.localize("SSS.Pool.LooseDie"),
+      traitType: "loose"
     });
   }
 
